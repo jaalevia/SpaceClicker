@@ -23,8 +23,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (player == gameObject)
         {
-            TakeDamage(25);
-            if (currentHealth == 0)
+            TakeDamage(5);
+            if (currentHealth < 0)
             {
                 deathPanel.SetActive(true);
             }

@@ -12,13 +12,15 @@ public class MonsterScript : MonoBehaviour
     float agroGange;
     [SerializeField]
     GameObject monster;
+    [SerializeField]
+    float moveX;
 
     public HealthScript healthBar;
 
     public int maxHealth = 100;
     public int currentHealth;
 
-
+    
     Rigidbody2D rb;
     void Start()
     {
@@ -35,14 +37,7 @@ public class MonsterScript : MonoBehaviour
         {
             GoToPlayer();
         }
-        if (Input.GetButtonDown("Fire1"))
-        {
-            TakeDamage(15);
-            if (currentHealth < 0)
-            {
-                Destroy(monster);
-            }
-        }
+        
     }
 
     void GoToPlayer()
@@ -61,6 +56,16 @@ public class MonsterScript : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+    }
+
+    void OnMouseDown()
+    {
+        rb.AddForce(new Vector2(-moveX, 0));
+        TakeDamage(15);
+        if (currentHealth < 0)
+        {
+            Destroy(monster);
+        }
     }
 
 }
