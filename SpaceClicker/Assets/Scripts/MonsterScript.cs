@@ -10,11 +10,20 @@ public class MonsterScript : MonoBehaviour
     Transform player;
     [SerializeField]
     float agroGange;
+    [SerializeField]
+    GameObject monster;
+
+    public HealthScript healthBar;
+
+    public int maxHealth = 100;
+    public int currentHealth;
 
 
     Rigidbody2D rb;
     void Start()
     {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -25,6 +34,14 @@ public class MonsterScript : MonoBehaviour
         if (distToPlayer < agroGange)
         {
             GoToPlayer();
+        }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            TakeDamage(15);
+            if (currentHealth < 0)
+            {
+                Destroy(monster);
+            }
         }
     }
 
@@ -39,6 +56,11 @@ public class MonsterScript : MonoBehaviour
             rb.velocity = new Vector2(-moveSpeed, 0);
         }
 
+    }
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
     }
 
 }
