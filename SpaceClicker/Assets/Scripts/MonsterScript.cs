@@ -14,6 +14,7 @@ public class MonsterScript : MonoBehaviour
     GameObject monster;
     [SerializeField]
     float moveX;
+    
 
     public HealthScript healthBar;
 
@@ -27,6 +28,7 @@ public class MonsterScript : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     void Update()
@@ -37,7 +39,7 @@ public class MonsterScript : MonoBehaviour
         {
             GoToPlayer();
         }
-        
+           
     }
 
     void GoToPlayer()
@@ -60,12 +62,23 @@ public class MonsterScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        rb.AddForce(new Vector2(-moveX, 0));
+        //var direction = (player.position - transform.position).normalized;
+        //rb.AddForce(direction * 100000000, ForceMode2D.Impulse);
+        //rb.velocity = Vector3.zero;
+        //rb.AddForce(monster.transform.up * 9.0F, ForceMode2D.Impulse);
+
+        
+        Debug.Log("Touched");
         TakeDamage(15);
         if (currentHealth < 0)
         {
             Destroy(monster);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
 }
