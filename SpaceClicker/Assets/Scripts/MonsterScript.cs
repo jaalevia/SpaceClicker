@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MonsterScript : MonoBehaviour
 {
+    public ShopScript shopScript;
     [SerializeField]
     float moveSpeed;
     [SerializeField]

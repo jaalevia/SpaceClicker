@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
+    public ShopScript shopScript;
     public GameObject monster;
     public GameObject player;
     public GameObject deathPanel;
-    
+    public GameObject currentPanel;
+    public GameObject statsPanel;
+
     public HealthScript healthBar;
 
     public int maxHealth = 100;
@@ -26,6 +29,8 @@ public class PlayerScript : MonoBehaviour
             TakeDamage(5);
             if (currentHealth < 0)
             {
+                statsPanel.SetActive(false); ;
+                currentPanel.SetActive(false);
                 deathPanel.SetActive(true);
             }
             
