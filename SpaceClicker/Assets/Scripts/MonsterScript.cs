@@ -64,7 +64,7 @@ public class MonsterScript : MonoBehaviour
     void OnMouseDown()
     {
         //var direction = (player.position - transform.position).normalized;
-        //rb.AddForce(direction * 100000000, ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(50, 50), ForceMode2D.Impulse);
         //rb.velocity = Vector3.zero;
         //rb.AddForce(monster.transform.up * 9.0F, ForceMode2D.Impulse);
 
