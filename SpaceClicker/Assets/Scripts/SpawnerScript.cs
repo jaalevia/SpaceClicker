@@ -5,6 +5,10 @@ using UnityEngine;
 public class SpawnerScript : MonoBehaviour
 {
     public GameObject apple;
+    [SerializeField]
+    GameObject panel1;
+    [SerializeField]
+    GameObject panel2;
     //float x, y;
     [SerializeField]
     Transform parentApple;
@@ -50,6 +54,8 @@ public class SpawnerScript : MonoBehaviour
         if (appleList.Count == 10)
         {
             deathPanel.SetActive(true);
+            panel1.SetActive(false);
+            panel2.SetActive(false);
 
         }
             

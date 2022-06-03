@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
@@ -16,5 +17,19 @@ public class Settings : MonoBehaviour
 
         masterVolumeSliderText.text = ((int)(volume * 100)).ToString();
     }
+
+    public void Load()
+    {
+
+        SceneManager.LoadScene(0);
+
+    }
+    public void Quit()
+    {
+
+        Application.Quit();
+    
+    }
+
 
 }

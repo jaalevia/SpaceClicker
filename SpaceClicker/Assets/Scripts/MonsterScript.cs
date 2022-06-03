@@ -7,7 +7,7 @@ public class MonsterScript : MonoBehaviour
 {
     [Header("Scripts")]
     public ShopScript shopScript;
-    public HealthScript healthBar;
+    public Monsterhealth healthBar;
 
     [Header("Player")]
     [SerializeField]
@@ -30,7 +30,7 @@ public class MonsterScript : MonoBehaviour
     //public int maxHealth = 100;
     private float knockbackLeftTime;
 
-    private int currentMonsterHealth;
+    public int currentMonsterHealth;
     [SerializeField]
     int maxMonsterHealth;
 
@@ -103,7 +103,7 @@ public class MonsterScript : MonoBehaviour
         Debug.Log(shopScript.ClickDamage);
         if (currentMonsterHealth <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
