@@ -43,18 +43,22 @@ public class ShopScript : MonoBehaviour
     public int ClickDamage;
     
     public int[] CostInt;
-    
 
-    private void Update()
+    void Start()
+    {
+        gunPrice.text = CostInt[0] + "$";
+        shotgunPrice.text = CostInt[1] + "$";
+        tommygunPrice.text = CostInt[2] + "$";
+        machinegunPrice.text = CostInt[3] + "$";
+    }
+
+    void Update()
     {
         moneyText.text = "Money: "+ Money + "$";
         armorText.text = "Armor: " + Armor + "/50";
         healthText.text = "HP:" + HP + "/100";
         damageText.text = "Damage: " + ClickDamage;
-        gunPrice.text = CostInt[0] + "$";
-        shotgunPrice.text = CostInt[1] + "$";
-        tommygunPrice.text = CostInt[2] + "$";
-        machinegunPrice.text = CostInt[3] + "$";
+        
     }
 
 
