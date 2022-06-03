@@ -5,15 +5,20 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
+    [Header("Scripts")]
     public ShopScript shopScript;
-    public GameObject monster;
-    public GameObject player;
+    public HealthScript healthBar;
+    
+    //public GameObject monster;
+
+    [Header("Panels")]
     public GameObject deathPanel;
     public GameObject currentPanel;
     public GameObject statsPanel;
     
-    public HealthScript healthBar;
-
+    [Header("Player")]
+    public GameObject player;
+    
     public int maxHealth = 100;
     public int currentHealth;
 
@@ -42,10 +47,11 @@ public class PlayerScript : MonoBehaviour
             //Debug.Log(collision.name);
         }
     }
-
+   
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
     }
+
 }

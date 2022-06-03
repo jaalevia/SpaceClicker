@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HealthScript : MonoBehaviour
 {
+    public PlayerScript scr;
     public Slider slider;
 
     public void SetMaxHealth(int health)
@@ -15,8 +16,15 @@ public class HealthScript : MonoBehaviour
     
     }
 
+    private void Update()
+    {
+        slider.value = scr.currentHealth;
+    }
     public void SetHealth(int health)
     {
+        
         slider.value = health;
     }
+
+    
 }

@@ -50,6 +50,9 @@ public class ShopScript : MonoBehaviour
         shotgunPrice.text = CostInt[1] + "$";
         tommygunPrice.text = CostInt[2] + "$";
         machinegunPrice.text = CostInt[3] + "$";
+        ClickDamage = 1;
+        HP = playerScript.maxHealth;
+
     }
 
     void Update()
@@ -58,7 +61,8 @@ public class ShopScript : MonoBehaviour
         armorText.text = "Armor: " + Armor + "/50";
         healthText.text = "HP:" + HP + "/100";
         damageText.text = "Damage: " + ClickDamage;
-        
+
+        HP = playerScript.currentHealth;
     }
 
 

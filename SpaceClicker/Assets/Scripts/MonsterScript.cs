@@ -1,85 +1,110 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterScript : MonoBehaviour
 {
+    [Header("Scripts")]
     public ShopScript shopScript;
-    [SerializeField]
-    float moveSpeed;
+    public HealthScript healthBar;
+
+    [Header("Player")]
     [SerializeField]
     Transform player;
+
+    [Header("Monster Statistics")]
+    [SerializeField]
+    float moveSpeed;
+   
     [SerializeField]
     float agroGange;
     [SerializeField]
-    GameObject monster;
+    private float knockbackTime;
     [SerializeField]
-    float moveX;
-    
+    private float knockbackForce;
+    //[SerializeField]
+    //GameObject monster;
+    //[SerializeField]
+    //private float moveX;
+    //public int maxHealth = 100;
+    private float knockbackLeftTime;
 
-    public HealthScript healthBar;
+    private int currentMonsterHealth;
+    [SerializeField]
+    int maxMonsterHealth;
 
-    public int maxHealth = 100;
-    public int currentHealth;
-
-    
     Rigidbody2D rb;
+
     void Start()
     {
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        currentMonsterHealth = maxMonsterHealth;
+        healthBar.SetMaxHealth(maxMonsterHealth);
         rb = GetComponent<Rigidbody2D>();
-        
     }
 
     void Update()
     {
+        if (knockbackLeftTime > 0)
+            knockbackLeftTime -= Time.deltaTime;
+
         float distToPlayer = Vector2.Distance(transform.position, player.position);
         //print("distToPlayer:" + distToPlayer);
-        if (distToPlayer < agroGange)
+        if (distToPlayer < agroGange && knockbackLeftTime <= 0 && !Input.GetButton("Fire1"))
         {
             GoToPlayer();
         }
-           
+
+        /*if (Input.GetMouseButtonUp(0))
+        {
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+            if (hit && hit.collider != null)
+            {
+                Debug.Log(hit.collider.gameObject.name);
+            }
+        }*/
+        
     }
 
     void GoToPlayer()
     {
         if (transform.position.x < player.position.x)
         {
-            rb.velocity = new Vector2(moveSpeed, 0);
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
         }
         else
         {
-            rb.velocity = new Vector2(-moveSpeed, 0);
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
         }
 
     }
     void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        currentMonsterHealth -= damage;
+        healthBar.SetHealth(currentMonsterHealth);
     }
 
     void OnMouseDown()
     {
-        //var direction = (player.position - transform.position).normalized;
-        rb.AddForce(new Vector2(50, 50), ForceMode2D.Impulse);
+        rb.velocity = Vector3.zero;
+        Vector3 direction = (transform.position - player.position).normalized;
+        rb.AddForce(direction * knockbackForce, ForceMode2D.Impulse);
+        //Debug.Log(direction);
+        knockbackLeftTime = knockbackTime;
         //rb.velocity = Vector3.zero;
         //rb.AddForce(monster.transform.up * 9.0F, ForceMode2D.Impulse);
 
-        
-        Debug.Log("Touched");
-        TakeDamage(15);
-        if (currentHealth < 0)
+        //Debug.Log(shopScript.ClickDamage);
+        //Debug.Log("Touched");
+        TakeDamage(shopScript.ClickDamage);
+        Debug.Log(shopScript.ClickDamage);
+        if (currentMonsterHealth <= 0)
         {
-            Destroy(monster);
+            Destroy(gameObject);
         }
-    }
-
-    private void FixedUpdate()
-    {
-        
     }
 
 }
