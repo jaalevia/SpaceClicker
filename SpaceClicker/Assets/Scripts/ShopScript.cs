@@ -19,6 +19,11 @@ public class ShopScript : MonoBehaviour
     [SerializeField] int Armor;
     [SerializeField] int HP;
 
+
+    [SerializeField] private GameObject instPanel;
+    [SerializeField] private GameObject instButton;
+
+
     [HideInInspector]
     [SerializeField] int guntest = 0;
     [HideInInspector]
@@ -46,7 +51,7 @@ public class ShopScript : MonoBehaviour
 
     void Start()
     {
-        gunPrice.text = CostInt[0] + "$";
+        gunPrice.text = CostInt[4] + "$";
         shotgunPrice.text = CostInt[1] + "$";
         tommygunPrice.text = CostInt[2] + "$";
         machinegunPrice.text = CostInt[3] + "$";
@@ -69,12 +74,14 @@ public class ShopScript : MonoBehaviour
     public void OnClickBuyGun()
     {
 
-        if (Money >= CostInt[0] && guntest < 1)
+        if (Money >= CostInt[4] && guntest < 1)
         {
 
-            Money -= CostInt[0];
+            Money -= CostInt[4];
             ClickDamage = 15;
             gunPrice.text = "owned";
+            instPanel.SetActive(true);
+            instButton.SetActive(true);
             guntest++;
         }
         else
